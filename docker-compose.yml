@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  kurspy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kurspy_app
+    image: kurspy:latest
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./:/app
+    networks:
+      - kurspy_network
+    stdin_open: true
+    tty: true
+
+networks:
+  kurspy_network:
+    driver: bridge
